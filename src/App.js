@@ -17,6 +17,8 @@ function App() {
         >
           Learn React
         </a>
+        <p className="text-4xl text-white"> Hello</p>
+        
       </header>
     </div>
   );
