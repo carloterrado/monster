@@ -34,24 +34,28 @@ class App extends Component {
       return monster.name.toLocaleLowerCase().includes(this.state.searchValue);
     })
     return (
-      <div className="App">
+      <div className="App bg-slate-600 h-screen w-screen px-2 py-10 sm:p-14">
 
         {/* SEARCH INPUT FOR MONSTER */}
-        <input className="border px-4 py-2" type="search" placeholder="search monster..." 
-          onChange={ (event) => {
-            const searchValue = event.target.value.toLocaleLowerCase();
-            this.setState(() => {
-              return { searchValue };
-            });
-          }
-        } />
-        
+        <div className=" flex justify-end">
+          <input className="border px-4 py-2 w-full max-w-md focus:outline-none rounded-lg " type="search" placeholder="search monster..." 
+            onChange={ (event) => {
+              const searchValue = event.target.value.toLocaleLowerCase();
+              this.setState(() => {
+                return { searchValue };
+              });
+            }
+          } />
+        </div>
+
         {/* DISPLAY ALL MONSTER */}
-        {
-          filteredMonster.map((monster) => {
-            return <h1 key={monster.id}>{monster.name}</h1>;
-          })
-        }
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mt-10 gap-4">
+          {
+            filteredMonster.map((monster) => {
+              return <h1 className="border text-white" key={monster.id}>{monster.name}</h1>;
+            })
+          }
+        </div>
       </div>
     );
   }
