@@ -1,27 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p className="text-4xl text-white"> Hello</p>
+import logo from "./logo.svg";
+import "./App.css";
+
+class App extends Component {
+  constructor() {
+    super();
+
+    console.log("constructor");
+    this.state = {
+      monsters: [],
+      searchValue: '',
+    };
+  }
+
+  componentDidMount() {
+    console.log("componentDidmount");
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) =>
+        this.setState(() => {
+          return {
+            monsters: users,
+          };
+        })
+      );
+  }
+
+  render() {
+    console.log("render");
+
+    const filteredMonster = this.state.monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(this.state.searchValue);
+    })
+    return (
+      <div className="App">
+
+        {/* SEARCH INPUT FOR MONSTER */}
+        <input className="border px-4 py-2" type="search" placeholder="search monster..." 
+          onChange={ (event) => {
+            const searchValue = event.target.value.toLocaleLowerCase();
+            this.setState(() => {
+              return { searchValue };
+            });
+          }
+        } />
         
-      </header>
-    </div>
-  );
+        {/* DISPLAY ALL MONSTER */}
+        {
+          filteredMonster.map((monster) => {
+            return <h1 key={monster.id}>{monster.name}</h1>;
+          })
+        }
+      </div>
+    );
+  }
 }
 
 export default App;
