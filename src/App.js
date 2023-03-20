@@ -37,12 +37,12 @@ const App = () => {
     <div className="App bg-slate-600 min-h-screen min-w-screen px-2 py-10 sm:p-14">
       <div className=" flex justify-between flex-wrap gap-4">
         <h1 className="text-xl md:text-4xl font-bold text-white text-center md:text-start w-full md:w-1/2">
-          List of Monster
+          React Monsters
         </h1>
 
         <SearchBox
           onChangeHandler={onChangeValue}
-          placeholder="search pokemon..."
+          placeholder="search monster..."
           className="border px-4 py-2 w-full max-w-md mx-auto md:mx-0 focus:outline-none rounded-lg"
         />
       </div>
